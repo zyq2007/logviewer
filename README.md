@@ -8,9 +8,11 @@ Download repo and change conf/config.php or create conf/local.php and overwrite 
 
 ## Examples
 
-- ![HTML output example](/wikidi/logviewer/raw/master/doc/example1.png "Example 1")
-- ![HTML output example](/wikidi/logviewer/raw/master/doc/example2.png "Example 2")
-- ![Ladenka](/wikidi/logviewer/raw/master/doc/ladenka.png "Example 3")
+![HTML output example](/wikidi/logviewer/raw/master/doc/example.png "Example 1")
+
+![HTML output example](/wikidi/logviewer/raw/master/doc/example1.png "Example 2")
+
+![Ladenka](/wikidi/logviewer/raw/master/doc/ladenka.png "Example 3")
 
 ## Meta
 
