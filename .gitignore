@@ -1,0 +1,5 @@
+.DS_Storage
+.project
+.settings
+/nbproject
+/.idea/
