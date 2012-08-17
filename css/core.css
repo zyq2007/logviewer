@@ -1,0 +1,136 @@
+body.withHeaders {
+	margin:60px 0;
+}
+
+pre hr {
+	margin: 10px 0;
+	padding: 0;
+	border-top-color: #c7c7c7;
+}
+
+pre a:hover, pre a {
+	text-decoration: none;
+	color: #333;
+}
+pre a:hover {
+	text-decoration: underline;
+}
+
+div.show,
+div.logs {
+	margin: 0 15px;
+}
+
+div.logGroup {
+	text-align: left;
+	border: 1px solid #cbdfe8;
+	padding: 7px;
+	width: 220px;
+	height: 220px;
+
+	vertical-align: top;
+	background: #dff6ff;
+	margin: 5px;
+	overflow: auto;
+	display: inline-block;
+}
+
+div.logGroup ul {
+	padding: 0;
+	margin: 4px 0 0 0;
+}
+
+div#filters {
+	top: 0;
+	left: 0;
+	width: 100%;
+	padding: 10px 12px;
+	border-bottom: 1px solid #aaaaaa;
+	background-color: #eee;
+	overflow: hidden;
+
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box; /* Firefox, other Gecko */
+	box-sizing: border-box; /* Opera/IE 8+ */
+}
+
+div#filters form {
+	margin: 0;
+}
+
+div#filters label {
+	margin-left: 6px;
+}
+
+div.pin {
+	position: absolute;
+}
+
+div.floating {
+	position: fixed;
+}
+
+div.show div.output {
+	background: #fff;
+}
+
+body iframe {
+	border: 0;
+	width: 100%;
+	padding: 5px 0;
+	min-height: 1024px;
+}
+
+div.cleaner {
+	clear: both;
+}
+
+/* error reporting */
+
+span.info, strong.info {
+	color: #0055cc;
+}
+
+span.ok {
+	color: #3a8834;
+}
+
+span.error {
+	color: #bb322d;
+}
+
+span.warning {
+	color: #ff6800;
+}
+
+span.faild,
+span.success,
+span.faild span,
+span.success span {
+	color: #fff;
+}
+
+span.faild,
+span.success {
+	display: inline-block;
+	padding: 2px .5em;
+}
+
+span.faild {
+	background-color: #bb322d;
+	font-weight: bold;
+}
+
+span.faild a {
+	color: #fffa00;
+}
+
+span.success {
+	background-color: #3a8834;
+}
+
+.printscreen {
+	margin: 1em auto;
+	max-width: 100%;
+	text-align: center;
+}

@@ -2,4 +2,5 @@
 .project
 .settings
 /nbproject
-/.idea/
+/.idea
+conf/local.php

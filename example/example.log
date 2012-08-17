@@ -1,0 +1,65 @@
+BUILD FAILED or BUILD SUCCESSFUL
+========================================================================================================================
+fatal: somethinfg
+========================================================================================================================
+error: something
+========================================================================================================================
+FAILURES!
+========================================================================================================================
+
+[07-Aug-2012 08:02:48 UTC] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ')' in /Users/roman/workspace/wikidi-default/htdocs/logviewer/conf/config.php on line 41
+
+[06-Aug-2012 11:16:56 UTC] PHP Fatal error:  Call to undefined function file_get_content() in /Users/roman/workspace/wikidi-default/htdocs/logviewer/templates/show.phtml on line 15
+
+[06-Aug-2012 06:35:47 UTC] PHP Warning:  Invalid argument supplied for foreach() in /Users/roman/workspace/wikidi-default/htdocs/logviewer/templates/getlist.phtml on line 4
+
+[06-Aug-2012 06:35:47 UTC] PHP Notice:  Undefined variable: logs in /Users/roman/workspace/wikidi-default/htdocs/logviewer/templates/getlist.phtml on line 4
+
+[07-Aug-2012 06:45:22 UTC] [2012-08-07 08-45-22] Fatal error: Call to a member function getApiKey() on a non-object in /var/www/testomato/htdocs/src/testomato/api/rest/ValidInputLoader.php:60  @  http://testomato.trunk.brzy.cz/api/project/wikidi.com-30275112?apikey=6H5X3gfZ  @@  exception-2012-08-02-16-12-04-f1c079943e9ffe082cefafb3373d68cc.html
+
+========================================================================================================================
+[echo] [info] 2012-08-07 10:09:21: http://f34e902107c768c0865f1d41b0da7aebef9ca524.testomato.hash.brzy.cz/ touched..
+[info] Calling http://center-web.center.int.wikidi.net:8080/api/import/?hash=f34e902107c768c0865f1d41b0da7aebef9ca52420120807100840trunk625&type=codesniffer&name= by curl
+========================================================================================================================
+$ git checkout 9-sign-in-out
+app/helpers/application_helper.rb: needs merge
+config/routes.rb: needs merge
+error: you need to resolve your current index first
+========================================================================================================================
+. 1/19 cached: /home/testomato/repo/web.testomato/tests/selenium/rc/test404Page.html
+E 4/19 cached: /home/testomato/repo/web.testomato/tests/selenium/rc/testEnvTesting.html
+========================================================================================================================
+File does not exist
+Operation not permitted
+Warning:
+------------------------------------------------------------------------------------------------------------------------
+HEAD is now at f34e902 neco neco neco
+========================================================================================================================
+Warnings: 0
+0 warning(s)
+0 error(s)
+OK (500 tests, 5 assertions)
+OK, but incomplete or skipped tests!
+------------------------------------------------------------------------------------------------------------------------
+Tests: 9, Assertions: 9, Errors: 5.
+========================================================================================================================
+[JSHint] OK
+[JSHint] 5 ERRORS!
+[PHP CodeSniffer] OK
+[PHP CodeSniffer] 5 ERROR!
+------------------------------------------------------------------------------------------------------------------------
+[info] bla bla
+[OK] bla bla
+[ERROR] bla bla
+[ERRORS] bla bla
+[WARNING] bla bla
+[WARNINGS] bla bla
+
+Links: https://www.google.com and http://www.google.com/
+========================================================================================================================
+<valid html escaping>
+========================================================================================================================
+[Wed Aug 08 15:12:32 2012] [error] [client 10.2.127.252] PHP Parse error:  syntax error, unexpected '.' in /var/www/admin/htdocs/logviewer/logviewer/LogReader.php on line 151, referer: http://wikidi-admin.6.web.srv.wikidi.net:8080/logviewer/index.php?lines=150&reverse=1&tail=1&header=1&action=show&log=%2Fvar%2Fwww%2Fadmin%2Flogs%2Fhttp%2Ferror.log
+[Wed Aug 08 15:12:26 2012] [error] [client 10.2.127.252] PHP Notice:  Undefined variable: output in /var/www/admin/htdocs/logviewer/logviewer/LogReader.php on line 163, referer: http://wikidi-admin.6.web.srv.wikidi.net:8080/logviewer/index.php?lines=150&reverse=1&tail=1&header=1&action=show&log=%2Fvar%2Fwww%2Fadmin%2Flogs%2Fhttp%2Ferror.log
+[Wed Aug 08 13:12:42 2012] [error] [client 10.2.127.252] File does not exist: /var/www/admin/htdocs/favicon.ico
+[07-Aug-2012 23:32:02 UTC] [2012-08-08 01-32-02] Exception: Unable to connect to database in /var/www/admin/htdocs/xhprof/xhprof_lib/utils/xhprof_runs_mysql.php:92  @  http://testomato.com/  @@  exception-2012-07-18-13-06-59-e457f59bb715d7d802eb2043962d4b70.html
