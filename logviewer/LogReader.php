@@ -2,6 +2,7 @@
 namespace logviewer;
 /**
  * @author Roman Ozana <ozana@omdesign.cz>
+ * @author Jan Prachař <jan.prachar@gmail.com>
  * @author Tomas Ovesny <tomas@wikidi.com>
  */
 class LogReader {
@@ -48,38 +49,12 @@ class LogReader {
 		return $output;
 	}
 
-	public function tail($filename, $lines = 10, $buffer = 4096) {
-		$f = fopen($filename, "rb");
-		fseek($f, -1, SEEK_END);
-		if (fread($f, 1) != "\n") $lines -= 1;
-		$output = '';
-		while (ftell($f) > 0 && $lines >= 0) {
-			$seek = min(ftell($f), $buffer);
-			fseek($f, -$seek, SEEK_CUR);
-			$output = ($chunk = fread($f, $seek)) . $output;
-			fseek($f, -mb_strlen($chunk, '8bit'), SEEK_CUR);
-			$lines -= substr_count($chunk, "\n");
-		}
-		while ($lines++ < 0) {
-			$output = substr($output, strpos($output, "\n") + 1);
-		}
-		fclose($f);
-		return $output;
+	private function cat($glob, $limit) {
+		$glob = preg_replace('/^(.*\.log)$/', '\1 \1*.gz', $glob); //logrotate support
+		return shell_exec('for i in `ls -t -r ' . $glob . '`; do zcat -f $i; done | ' . ($this->config->tail ? 'tail' : 'head') . ' -n ' . escapeshellarg($limit));
 	}
 
-	public function slice($log, $lines = 10) {
-		$file = fopen($log, 'r');
-		$output = '';
-		$counter = 0;
-		while ($data = fgetcsv($file, 0, "\n")) {
-			$output .= reset($data) . PHP_EOL;
-			if ($counter == ($lines - 1)) break;
-			++$counter;
-		}
-		return $output;
-	}
-
-	public function formatOutput($output, $reverse, $showmachine) {
+	private function formatOutput($output, $reverse, $showmachine) {
 		if ($reverse || $showmachine) {
 			$output = explode(PHP_EOL, $output);
 			if ($reverse) $output = array_reverse($output);
@@ -97,11 +72,7 @@ class LogReader {
 
 	private function processLocal($log) {
 		$limit = ($this->config->lines > 0) ? $this->config->lines : 150;
-		if ($this->config->tail) {
-			$output = $this->tail($log, $limit);
-		} else {
-			$output = $this->slice($log, $limit);
-		}
+		$output = $this->cat($log, $limit);
 		return $this->formatOutput($output, $this->config->reverse, $this->config->showmachine);
 	}
 
