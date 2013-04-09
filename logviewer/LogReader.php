@@ -27,7 +27,7 @@ class LogReader {
 	}
 
 	public function display() {
-		if (!$this->isReadable()) die('Sorry! Log "' . $this->log . '" not readable!');
+		if (!$this->isReadable()) die('Sorry! Log "' . $this->log . '" is not readable or does not exist!');
 		switch ($this->logType) {
 			case 'png':
 			case 'jpeg':
