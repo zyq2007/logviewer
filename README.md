@@ -8,14 +8,14 @@ Download repo and change conf/config.php or create conf/local.php and overwrite 
 
 ## Examples
 
-![HTML output example](/wikidi/logviewer/raw/master/doc/example.png "Example 1")
+![HTML output example](https://raw.github.com/wikidi/logviewer/master/doc/example.png "Example 1")
 
-![HTML output example](/wikidi/logviewer/raw/master/doc/example1.png "Example 2")
+![HTML output example](https://raw.github.com/wikidi/logviewer/master/doc/example1.png "Example 2")
 
-![Ladenka](/wikidi/logviewer/raw/master/doc/ladenka.png "Example 3")
+![Ladenka](https://raw.github.com/wikidi/logviewer/master/doc/ladenka.png "Example 3")
 
 ## Meta
 
-Author: [wikidi.com](http://wikidi.com) & [Roman Ožana](https://github.com/OzzyCzech) & [Tomaš Ovesný](https://github.com/tomasovesny) & [Lex Vjatkin](https://github.com/lexvjatkin)
+Author: [wikidi.com](http://wikidi.com) & [Roman Ožana](https://github.com/OzzyCzech) & [Tomaš Ovesný](https://github.com/tomasovesny) & [Lex Vjatkin](https://github.com/lexvjatkin) & [Jan Prachař](https://github.com/pracj3am)
 
-For the license terms see LICENSE.TXT files.
+For the license terms see LICENSE.TXT file.
