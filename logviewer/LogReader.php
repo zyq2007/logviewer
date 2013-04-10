@@ -41,7 +41,7 @@ class LogReader {
 	}
 
 	private function cat($glob, $limit) {
-		$phpglob = preg_replace('/^\.log$/', '.log{,*.gz}', $glob); //logrotate support
+		$phpglob = preg_replace('/\.log$/', '.log{,*.gz}', $glob); //logrotate support
 		$glob = preg_replace('/^(.*\.log)$/', '\1 \1*.gz', $glob); //logrotate support
 
 		$matched = false;

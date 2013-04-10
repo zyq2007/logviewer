@@ -33,7 +33,7 @@ class Utils {
 			'/^(' . implode('|', array_map($quote, $stripPaths)) . ')/' => '',
 			'/(' . implode('|', array_map($quote, $removeDirParts)) . ')/' => '',
 			'/^' . $quote(DIRECTORY_SEPARATOR) . '/' => '',
-			'/' . $quote(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR) . '?/' => ' - ',
+			'/' . $quote(DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR) . '?/' => ' – ',
 		);
 
 		foreach ($logs as $log) {
