@@ -19,16 +19,7 @@ class LogReader {
 		$this->logType = $logType;
 	}
 
-	public function isReadable() {
-		foreach ($this->config->_filelist as $link) {
-			$pattern = '#^' . str_replace('\*', '.+', preg_quote($link, '#')) . '$#i';
-			if (preg_match($pattern, $this->log)) return is_readable($this->log);
-		}
-		return false;
-	}
-
 	public function display() {
-		if (!$this->isReadable()) die('Sorry! Log "' . $this->log . '" is not readable or does not exist!');
 		switch ($this->logType) {
 			case 'png':
 			case 'jpeg':
@@ -50,7 +41,24 @@ class LogReader {
 	}
 
 	private function cat($glob, $limit) {
+		$phpglob = preg_replace('/^\.log$/', '.log{,*.gz}', $glob); //logrotate support
 		$glob = preg_replace('/^(.*\.log)$/', '\1 \1*.gz', $glob); //logrotate support
+
+		$matched = false;
+		foreach ($this->config->_filelist as $link) {
+			$pattern = '#^' . str_replace('\*', '.+', preg_quote($link, '#')) . '$#i';
+			if (preg_match($pattern, $this->log)) {
+				$matched = true;
+				if (!glob($phpglob, \GLOB_BRACE)) {
+					throw new NotReadableException('File ' . $this->log . ' is not accesible or does not exists!');
+				}
+				break;
+			}
+		}
+		if (!$matched) {
+			throw new NotReadableException('File ' . $this->log  . ' does not match config filelist.');
+		}
+
 		$output = array();
 		exec('for i in `ls -t -r ' . $glob . '`; do zcat -f $i 2>&1; done | ' . ($this->config->tail ? 'tail' : 'head') . ' -n ' . escapeshellarg($limit), $output, $retval);
 		return $output;
@@ -73,7 +81,12 @@ class LogReader {
 
 	private function processLocal($log) {
 		$limit = ($this->config->lines > 0) ? $this->config->lines : 150;
-		$output = $this->cat($log, $limit);
+		try {
+			$output = $this->cat($log, $limit);
+		} catch (NotReadableException $e) {
+			//@TODO hezčí formátování
+			die($e->getMessage());
+		}
 		return $this->formatOutput($output, $this->config->reverse, $this->config->showmachine);
 	}
 
@@ -133,3 +146,6 @@ class LogReader {
 		return $binaryContents;
 	}
 }
+
+
+class NotReadableException extends \Exception {}
