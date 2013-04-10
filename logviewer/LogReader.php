@@ -51,12 +51,13 @@ class LogReader {
 
 	private function cat($glob, $limit) {
 		$glob = preg_replace('/^(.*\.log)$/', '\1 \1*.gz', $glob); //logrotate support
-		return shell_exec('for i in `ls -t -r ' . $glob . '`; do zcat -f $i; done | ' . ($this->config->tail ? 'tail' : 'head') . ' -n ' . escapeshellarg($limit));
+		$output = array();
+		exec('for i in `ls -t -r ' . $glob . '`; do zcat -f $i 2>&1; done | ' . ($this->config->tail ? 'tail' : 'head') . ' -n ' . escapeshellarg($limit), $output, $retval);
+		return $output;
 	}
 
 	private function formatOutput($output, $reverse, $showmachine) {
 		if ($reverse || $showmachine) {
-			$output = explode(PHP_EOL, $output);
 			if ($reverse) $output = array_reverse($output);
 
 			if ($showmachine) $output = array_map(
