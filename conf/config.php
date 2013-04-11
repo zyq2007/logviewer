@@ -1,7 +1,7 @@
 <?php
 $private = array(
 
-	'version' => 'v1.4.0',
+	'version' => 'v1.4.1',
 
 	// zacatky cest k logum - je to kvuli odstraneni zacatku cesty pro setrideni do skupin, jinak spadne do vychozi
 	'stripPaths' => array('/var/log/'),

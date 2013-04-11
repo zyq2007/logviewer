@@ -73,10 +73,8 @@ class LogReader {
 					return '-' . $_SERVER['HTTP_HOST'] . '- ' . $line;
 				}, $output
 			);
-			return implode(PHP_EOL, $output);
 		}
-
-		return $output;
+		return implode(PHP_EOL, $output);
 	}
 
 	private function processLocal($log) {
