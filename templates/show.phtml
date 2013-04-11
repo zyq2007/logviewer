@@ -44,8 +44,8 @@
 				// lokalni log prozenu nejdriv obarvovacem a pak nahradim systemove promenne v druhem kole
 				$output = preg_replace(array_keys($config->_replace), array_values($config->_replace), htmlspecialchars($output, ENT_QUOTES));
 				$replace = array(
-					'/{dirname}/i' => dirname($log),
-					'/{url}/i' => $url,
+					'/\{dirname\}/i' => dirname($log),
+					'/\{url\}/i' => $url,
 				);
 				$output = preg_replace(array_keys($replace), array_values($replace), $output);
 				echo '<pre>' . $output . '</pre>';
