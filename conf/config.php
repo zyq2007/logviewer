@@ -4,35 +4,14 @@ $private = array(
 	'version' => 'v1.3.2',
 
 	// zacatky cest k logum - je to kvuli odstraneni zacatku cesty pro setrideni do skupin, jinak spadne do vychozi
-	'stripPaths' => array('/var/www/', '/var/log/'),
+	'stripPaths' => array('/var/log/'),
 
 	// muzu provadet multi?
-	'isMulti' => '/.*\d+\..*\.wikidi\.\w+/',
+	'isMulti' => '/https?:\/\/\d+/',
 
 	// masky adresaru s logy
 	'filelist' => array(
-		'/var/www/*/logs/*/*.log',
-
-		// novejsi projekty to copou tady
-		'/var/www/*/htdocs/log/*.log',
-		'/var/www/*/htdocs/log/*/*.log',
-		'/var/www/*/htdocs/log/*/*.html',
-		'/var/www/*/mass/*/log/*/*.html', // hash
-		'/var/www/*/mass/*/log/*/*.log',
-
-		// nektere starsi projekty to cpou sem
-		'/var/www/*/htdocs/logs/*.log',
-		'/var/www/*/htdocs/logs/*/*.log',
-		'/var/www/*/htdocs/logs/*/*.html',
-		'/var/www/*/mass/*/logs/*/*.html',
-		'/var/www/*/mass/*/logs/*/*.log',
-
-		// selenium testy FIXME nutno zmenit target ukladani, tady nikdy euvidime
-		//'/home/*/repo/*/testbuilder/selenium-screens/*.png',
-		//'/home/*/repo/*/testbuilder/selenium-screens/*.html',
-
-		// sphinx
-		'/var/log/sphinxsearch/*.log',
+		'/var/log/*/*.log'
 	),
 
 	'colors' => array(
