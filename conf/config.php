@@ -14,7 +14,8 @@ $private = array(
 		'/var/log/*/*.log'
 	),
 
-	'colors' => array(
+	// regexps for replaces in log content
+	'replace' => array(
 		// ANSI escape chars
 		'/\x1b(\[|\(|\))[;?0-9]*[0-9A-Za-z]/' => "",
 		'/\x1b(\[|\(|\))[;?0-9]*[0-9A-Za-z]/' => "",

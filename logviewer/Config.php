@@ -6,7 +6,7 @@ namespace logviewer;
  * @property array $_stripPaths
  * @property array $_filelist
  * @property array $_isMulti
- * @property array $_colors
+ * @property array $_replace
  *
  * @property int $merge
  * @property int $lines
