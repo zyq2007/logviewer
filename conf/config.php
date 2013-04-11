@@ -7,7 +7,7 @@ $private = array(
 	'stripPaths' => array('/var/log/'),
 
 	// muzu provadet multi?
-	'isMulti' => '/https?:\/\/\d+/',
+	'isMulti' => '/^https?:\/\/\d+/',
 
 	// masky adresaru s logy
 	'filelist' => array(
