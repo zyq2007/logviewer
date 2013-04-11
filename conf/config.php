@@ -35,9 +35,6 @@ $private = array(
 		// permissions
 		'/(Permission denied)/i' => '<span class="faild">$1</span>',
 
-		// ladenka error
-		'/(.*Fatal error:[^\n]*)/' => '<span class="faild">$1</span>',
-
 		// git
 		'/(^fatal:[^\n]+)/im' => '<span class="faild">$1</span>', // git fatal
 		'/((^[\s]?error:|.*-[\s]+error:)[^\n]+)/im' => '<span class="error">$1</span>', // git errro
@@ -80,7 +77,9 @@ $private = array(
 		'/(0 error\(s\))/' => '<span class="ok">$1</span>',
 		'/(OK \([0-9]+ tests, [0-9]+ assertions\))/i' => '<span class="ok">$1</span>',
 
-		// ladenka
+		// tracy
+		'/(.*Fatal error:[^\n]*)/' => '<span class="faild">$1</span>',
+		'/(\S+\/exception-[\-0-9]*-[[:alnum:]]*\.html)/' => '<a href="{url}&action=show&log=$1">$1</a>',
 		'/(exception-[\-0-9]*-[[:alnum:]]*\.html)/' => '<a href="{url}&action=show&log={dirname}/$1">$1</a>',
 
 		'/([^\n]+------+\n)/' => '<hr>',
