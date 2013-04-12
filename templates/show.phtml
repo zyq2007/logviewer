@@ -32,9 +32,10 @@
 				echo '<div class="tab-content">';
 				$i = 1;
 				foreach ($output as $server => $data) {
+					$data = htmlspecialchars($data, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 					echo '<div class="tab-pane'. (($i === 1) ? ' active' : null )  .'" id="server-' . $i . '">
 					<h4>' . $server . '</h4>';
-					echo '<pre>' . preg_replace(array_keys($config->_replace), array_values($config->_replace), htmlspecialchars($data, ENT_QUOTES)) . '</pre>';
+					echo '<pre>' . preg_replace(array_keys($config->_replace), array_values($config->_replace), $data) . '</pre>';
 					echo '</div>';
 					$i++;
 				}
@@ -42,7 +43,7 @@
 
 			} else {
 				// lokalni log prozenu nejdriv obarvovacem a pak nahradim systemove promenne v druhem kole
-				$output = htmlspecialchars($output, ENT_QUOTES | ENT_SUBSTITUTE);
+				$output = htmlspecialchars($output, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 				$output = preg_replace(array_keys($config->_replace), array_values($config->_replace), $output);
 				$replace = array(
 					'/\{dirname\}/i' => dirname($log),
