@@ -1,4 +1,16 @@
 <? /** @var \logviewer\Config $config */ ?>
+<?
+$escapeAndReplace = function($output) use ($config, $log, $url) {
+	$output = htmlspecialchars($output, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+	$output = preg_replace(array_keys($config->_replace), array_values($config->_replace), $output);
+	$replace = array(
+		'/\{dirname\}/i' => dirname($log),
+		'/\{url\}/i' => $url,
+	);
+	$output = preg_replace(array_keys($replace), array_values($replace), $output);
+	return $output;
+}
+?>
 <? if ($config->header) { ?><?= $filters ?><div class="show"><h3>Output - <?=$log?></h3><? } ?>
 
 	<div class="output" id="top">
@@ -32,10 +44,9 @@
 				echo '<div class="tab-content">';
 				$i = 1;
 				foreach ($output as $server => $data) {
-					$data = htmlspecialchars($data, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 					echo '<div class="tab-pane'. (($i === 1) ? ' active' : null )  .'" id="server-' . $i . '">
 					<h4>' . $server . '</h4>';
-					echo '<pre>' . preg_replace(array_keys($config->_replace), array_values($config->_replace), $data) . '</pre>';
+					echo '<pre>' . $escapeAndReplace($data) . '</pre>';
 					echo '</div>';
 					$i++;
 				}
@@ -43,14 +54,7 @@
 
 			} else {
 				// lokalni log prozenu nejdriv obarvovacem a pak nahradim systemove promenne v druhem kole
-				$output = htmlspecialchars($output, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
-				$output = preg_replace(array_keys($config->_replace), array_values($config->_replace), $output);
-				$replace = array(
-					'/\{dirname\}/i' => dirname($log),
-					'/\{url\}/i' => $url,
-				);
-				$output = preg_replace(array_keys($replace), array_values($replace), $output);
-				echo '<pre>' . $output . '</pre>';
+				echo '<pre>' . $escapeAndReplace($output) . '</pre>';
 			}
 				break;
 		}
