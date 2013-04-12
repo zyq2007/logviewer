@@ -1,6 +1,6 @@
 <? /** @var \logviewer\Config $config */ ?>
 <?
-$escapeAndReplace = function($output) use ($config, $log, $url) {
+$escapeAndReplace = function($output, $url) use ($config, $log) {
 	$output = htmlspecialchars($output, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
 	$output = preg_replace(array_keys($config->_replace), array_values($config->_replace), $output);
 	$replace = array(
@@ -35,18 +35,18 @@ $escapeAndReplace = function($output) use ($config, $log, $url) {
 			if (is_array($output)) {
 				$i = 1;
 				echo '<ul class="nav nav-tabs" id="servers">';
-				foreach (array_keys($output) as $server) {
-					echo '<li class="'. (($i == 1) ? ' active' : null )  .'"><a href="#server-' . $i. '" data-toggle="tab" title="' . $server . '">&nbsp;' . $i . '&nbsp;</a></li>';
+				foreach ($output as $server) {
+					echo '<li class="'. (($i == 1) ? ' active' : null )  .'"><a href="#server-' . $i. '" data-toggle="tab" title="' . $server['host'] . '">&nbsp;' . $i . '&nbsp;</a></li>';
 					$i++;
 				}
 				echo '</ul>';
 
 				echo '<div class="tab-content">';
 				$i = 1;
-				foreach ($output as $server => $data) {
+				foreach ($output as $server) {
 					echo '<div class="tab-pane'. (($i === 1) ? ' active' : null )  .'" id="server-' . $i . '">
-					<h4>' . $server . '</h4>';
-					echo '<pre>' . $escapeAndReplace($data) . '</pre>';
+					<h4>' . $server['host'] . '</h4>';
+					echo '<pre>' . $escapeAndReplace($server['output'], $server['logviewer'] . $url) . '</pre>';
 					echo '</div>';
 					$i++;
 				}
@@ -54,7 +54,7 @@ $escapeAndReplace = function($output) use ($config, $log, $url) {
 
 			} else {
 				// lokalni log prozenu nejdriv obarvovacem a pak nahradim systemove promenne v druhem kole
-				echo '<pre>' . $escapeAndReplace($output) . '</pre>';
+				echo '<pre>' . $escapeAndReplace($output, $url) . '</pre>';
 			}
 				break;
 		}

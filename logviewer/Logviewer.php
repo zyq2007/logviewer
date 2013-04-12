@@ -71,7 +71,7 @@ class Logviewer {
 			$view->log = $log;
 			$view->logType = $logType;
 			$view->config = $this->config;
-			$view->url = 'index.php?' . http_build_query($this->config->getPublic());
+			$view->url = '?' . http_build_query($this->config->getPublic());
 			$view->version = $this->config->_version;
 			echo $view->render();
 		}

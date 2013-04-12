@@ -105,8 +105,15 @@ class LogReader {
 		$url = $protocol . $host . ':' . $port . $script . '?' . http_build_query($params);
 
 		if (preg_match($this->config->_isMulti, $url)) {
+			$output = array();
 			foreach ($this->getMultiUrl($url) as $remoote) {
-				$output[parse_url($remoote, PHP_URL_HOST)] = $this->file_get_contents($remoote);
+				$host = parse_url($remoote, PHP_URL_HOST);
+				$output[] = [
+					'host' => $host,
+					'url' => $remoote,
+					'logviewer' => $protocol . $host . ':' . $port . $script,
+					'output' => $this->file_get_contents($remoote)
+				];
 			}
 		} else {
 			return $this->processLocal($this->log); // nacist pouze lokalni
