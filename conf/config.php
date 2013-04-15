@@ -1,7 +1,7 @@
 <?php
 $private = array(
 
-	'version' => 'v1.4.5',
+	'version' => 'v1.4.6',
 
 	// zacatky cest k logum - je to kvuli odstraneni zacatku cesty pro setrideni do skupin, jinak spadne do vychozi
 	'stripPaths' => array('/var/log/'),
@@ -80,7 +80,7 @@ $private = array(
 		// tracy
 		'/(.*Fatal error:[^\n]*)/' => '<span class="faild">$1</span>',
 		'/(\S+\/exception-[\-0-9]*-[[:alnum:]]*\.html)/' => '<a href="{url}&action=show&log=$1">$1</a>',
-		'/(\bexception-[\-0-9]*-[[:alnum:]]*\.html)/' => '<a href="{url}&action=show&log={dirname}/$1">$1</a>',
+		'/([^\/])(exception-[\-0-9]*-[[:alnum:]]*\.html)/' => '$1<a href="{url}&action=show&log={dirname}/$2">$2</a>',
 
 		'/([^\n]+------+\n)/' => '<hr>',
 		'/([^\n]+======+\n)/' => '</pre><pre>',
