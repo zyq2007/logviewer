@@ -60,7 +60,7 @@ class LogReader {
 		}
 
 		$output = array();
-		exec('for i in `ls -t -r ' . $glob . '`; do zcat -f $i 2>&1; done | ' . ($this->config->tail ? 'tail' : 'head') . ' -n ' . escapeshellarg($limit), $output, $retval);
+		exec('for i in `ls -t -r ' . $glob . '`; do gzip -dc -f $i 2>&1; done | ' . ($this->config->tail ? 'tail' : 'head') . ' -n ' . escapeshellarg($limit), $output, $retval);
 		return $output;
 	}
 
