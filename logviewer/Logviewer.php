@@ -66,6 +66,7 @@ class Logviewer {
 			$this->showRaw($logReader->display(), $logType, basename($log));
 		} else {
 			$view = new View('show.phtml');
+			$view->logProcessor = new LogProcessor($this->config);
 			$view->output = $logReader->display();
 			$view->filters = $this->getFilters();
 			$view->log = $log;

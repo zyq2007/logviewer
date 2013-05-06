@@ -14,7 +14,8 @@ class Filters {
 	/**
 	 * nacist polozky
 	 *
-	 * @param array polozky a hodnoty
+	 * @param Config $config
+	 * @internal param \logviewer\polozky $array a hodnoty
 	 */
 	public function __construct(Config $config) {
 		$this->config = $config;

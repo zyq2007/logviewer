@@ -28,6 +28,7 @@ class Config {
 
 	/**
 	 * @param string $conf
+	 * @throws \Exception
 	 */
 	public function __construct($conf) {
 		if (is_file($conf)) {
@@ -79,6 +80,7 @@ class Config {
 	 * Filtruje promennou z requestu
 	 *
 	 * @param mixed $value
+	 * @return string
 	 */
 	private function filter($value) {
 		return htmlspecialchars($value);
