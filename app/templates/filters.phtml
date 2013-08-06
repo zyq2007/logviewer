@@ -37,7 +37,7 @@
 	</a>
 
 	<!-- Direction -->
-	<? $direction = ($direction === 'reverse') ? 'normal' : 'reverse'; ?>
+	<? $direction = ($direction === 'normal') ? 'reverse' : 'normal'; ?>
 	<a href="/<?= url(array_merge($params, array('direction' => $direction)), $get) ?>"
 	   class="btn btn-default navbar-btn">
 		<?= ucfirst($params['direction'] ? : 'normal') ?> lines order
