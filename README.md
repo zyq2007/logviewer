@@ -8,11 +8,10 @@ Download repo and change conf/config.php or create conf/local.php and overwrite 
 
 ## Examples
 
-![HTML output example](https://raw.github.com/wikidi/logviewer/master/doc/example.png "Example 1")
-
-![HTML output example](https://raw.github.com/wikidi/logviewer/master/doc/example1.png "Example 2")
-
-![Ladenka](https://raw.github.com/wikidi/logviewer/master/doc/ladenka.png "Example 3")
+![LogViewer](https://raw.github.com/wikidi/logviewer/master/doc/example.png "Example")
+![Log Output example](https://raw.github.com/wikidi/logviewer/master/doc/example1.png "Example")
+![Log Output example](https://raw.github.com/wikidi/logviewer/master/doc/example2.png "Example")
+![Log Output example](https://raw.github.com/wikidi/logviewer/master/doc/example3.png "Example")
 
 ## Meta
 

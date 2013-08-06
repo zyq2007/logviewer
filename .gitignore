@@ -4,5 +4,6 @@
 /nbproject
 /.idea
 conf/local.php
-vendor
+vendor/nette
+vendor/bin
 composer.lock

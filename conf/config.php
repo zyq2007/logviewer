@@ -1,11 +1,6 @@
 <?php
 $private = array(
 
-	'version' => 'v1.4.6',
-
-	// zacatky cest k logum - je to kvuli odstraneni zacatku cesty pro setrideni do skupin, jinak spadne do vychozi
-	'stripPaths' => array('/var/log/'),
-
 	// muzu provadet multi?
 	'isMulti' => '/^https?:\/\/\d+/',
 
@@ -88,20 +83,6 @@ $private = array(
 	)
 );
 
-// ---------------------------------------------------------------------------------------------------------------------
+if (file_exists(__DIR__ . '/local.php')) require_once 'local.php';
 
-$public = array(
-	'lines' => 150, // kolik radku
-	'reverse' => true, // obracene poradi radku
-	'tail' => true, // cist od konce
-	'multi' => false, // logy ze vsech stroju (napr:wikidi-admin.1.web.srv.wikidi.net:8080) - meni se cislo[1-254]
-	'merge' => false, // obracene poradi radku
-	'showmachine' => false,
-	'header' => true, // mam zobrazit hlavicku view ?
-	'pin' => false, // pripnout hlavicku
-	'raw' => false, // ciste textovy vysput
-);
-
-if (file_exists(__DIR__ . '/local.php')) require_once 'local.php'; // prepisuje cokoliv
-
-return array('private' => $private, 'public' => $public);
+return array('private' => $private);

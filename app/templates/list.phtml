@@ -1,0 +1,33 @@
+<? getHeader() ?>
+
+<? getFilters($params); ?>
+
+	<div class="logs">
+
+		<?=
+		isset($_GET['message']) ? '<p class="alert"><strong>' . htmlentities(
+				$_GET['message']
+			) . '</strong></p>' : null; ?>
+
+		<? foreach ($logs as $group => $logs) { ?>
+
+			<div class="panel">
+				<div class="panel-heading" title="<?= realpath($group) ?>"><?= realpath($group) ?> <span
+						class="badge pull-right"><?= count($logs) ?></span></div>
+				<? if (count($logs) > 0) { ?>
+					<ul>
+						<? foreach ($logs as $log) { ?>
+							<li>
+								<a href="/view/<?= url($params, array('log' => $log['path'])); ?>"
+								   title="<?= realpath($log['path']) ?>"><?= $log['file'] ?></a>
+								<small>(<?= $log['size'] ?>)</small>
+							</li>
+						<? } ?>
+					</ul>
+				<? } ?>
+			</div>
+
+		<? } ?>
+	</div>
+
+<? getFooter() ?>

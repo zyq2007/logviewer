@@ -15,11 +15,9 @@ $private['filelist'] = array(
 // or use our example
 
 $private['filelist'] = array(
-	__DIR__ . '/../example/*.log',
-	__DIR__ . '/../example/*.jpg',
-	__DIR__ . '/../example/*.png',
-	__DIR__ . '/../example/*.html',
+	dirname(__DIR__) . '/app/log/*.log',
+	dirname(__DIR__) . '/app/log/*.jpg',
+	dirname(__DIR__) . '/app/log/*.png',
+	dirname(__DIR__) . '/app/log/*.html',
 );
-
-
 
