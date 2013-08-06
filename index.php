@@ -69,12 +69,11 @@ $app->get(
 				'jpg' => 'image/jpeg',
 			);
 
-			header('Content-Type: ' . array_key_exists($logType, $mime) ? $mime[$logType] : 'text/plain');
+			header('Content-Type: ' . (array_key_exists($logType, $mime) ? $mime[$logType] : 'text/plain'));
 			header('Content-Type: application/force-download');
 			header('Content-Description: File Transfer');
 			header('Content-Disposition: attachment; filename="' . basename($log) . '"');
 			die(is_array($content) ? implode(PHP_EOL, $content) : $content);
-
 		} else {
 			$app->view->log = $log;
 			$app->view->logProcessor = new LogProcessor($config);
