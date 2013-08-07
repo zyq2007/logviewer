@@ -1,12 +1,13 @@
+<? /** @var \logviewer\View $this */ ?>
 <!DOCTYPE html>
 <html lang="cs-CZ">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="Cache-Control" content="no-cache, must-revalidate"/>
 	<title><?= \logviewer\Utils::getServerName() ?> | LogViewer </title>
-	<link rel="shortcut icon" href="favicon.ico"/>
+	<link rel="shortcut icon" href="<?= $this->url('favicon.ico') ?>"/>
 	<meta name="robots" content="noarchive"/>
-	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" href="/css/core.css"/>
+	<link rel="stylesheet" type="text/css" href="<?= $this->url('css/bootstrap.min.css') ?>"/>
+	<link rel="stylesheet" type="text/css" href="<?= $this->url('css/core.css') ?>"/>
 </head>
 <body>

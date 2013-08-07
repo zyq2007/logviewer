@@ -7,7 +7,7 @@ namespace logviewer;
  */
 class LogReader {
 
-	/** @var \logviewer\Config */
+	/** @var Config */
 	private $config;
 	/** @var string */
 	public $lines = 150;
@@ -22,7 +22,7 @@ class LogReader {
 	/** @var string */
 	public $logType = '';
 
-	public function __construct(Config $config) {
+	public function __construct($config) {
 		$this->config = $config;
 	}
 
@@ -52,7 +52,7 @@ class LogReader {
 		$glob = preg_replace('/^(.*\.log)$/', '\1 \1*.gz', $glob); //logrotate support
 
 		$matched = false;
-		foreach ($this->config->_filelist as $link) {
+		foreach ($this->config->filelist as $link) {
 			$pattern = '#^' . str_replace('\*', '.+', preg_quote($link, '#')) . '$#i';
 			if (preg_match($pattern, $this->log)) {
 				$matched = true;
@@ -118,7 +118,7 @@ class LogReader {
 
 		$url = $protocol . $host . ':' . $port . $script . '?' . http_build_query($params);
 
-		if (preg_match($this->config->_isMulti, $url)) {
+		if (preg_match($this->config->isMulti, $url)) {
 			$output = array();
 			foreach ($this->getMultiUrl($url) as $remoote) {
 				$host = parse_url($remoote, PHP_URL_HOST);

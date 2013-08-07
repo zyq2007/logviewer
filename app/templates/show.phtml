@@ -1,9 +1,10 @@
-<? getHeader() ?>
-
-<? getFilters($params); ?>
-
+<? /** @var \logviewer\View $this */ ?>
 <? /** @var \logviewer\Config $config */ ?>
 <? /** @var \logviewer\LogProcessor $logProcessor */ ?>
+
+<? $this->getHeader() ?>
+
+<? $this->getFilters(); ?>
 
 <?
 $escapeAndReplace = function ($output, $url) use ($log, $logProcessor) {
@@ -65,4 +66,4 @@ $escapeAndReplace = function ($output, $url) use ($log, $logProcessor) {
 		}
 		?>
 	</div>
-	<? getFooter(); ?>
+	<? $this->getFooter(); ?>

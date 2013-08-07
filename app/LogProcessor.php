@@ -5,19 +5,19 @@ namespace logviewer;
  */
 class LogProcessor {
 
-	/** @var  Config */
+	/** @var Config */
 	private $config;
 
 	/**
 	 * @param Config $config
 	 */
-	public function __construct(Config $config) {
+	public function __construct($config) {
 		$this->config = $config;
 	}
 
 	public function highlight($log) {
 		$log = htmlspecialchars($log, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
-		return preg_replace(array_keys($this->config->_replace), array_values($this->config->_replace), $log);
+		return preg_replace(array_keys($this->config->replace), array_values($this->config->replace), $log);
 	}
 
 	public static function replaceKeywords($log, $url, $dirname) {

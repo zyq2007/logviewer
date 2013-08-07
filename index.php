@@ -1,19 +1,18 @@
 <?php
+/** $conf */
 namespace logviewer;
 
 use Slim\Slim;
 
 header('Cache-Control: no-cache, must-revalidate');
 require 'vendor/autoload.php';
-
+require_once 'conf/config.php';
 
 $app = new Slim(
 	array(
-		'view' => new View()
+		'view' => new View($config)
 	)
 );
-
-$config = new Config(__DIR__ . '/conf/config.php');
 
 $conditions = array(
 	'lines' => 'all|[0-9]+',
@@ -27,7 +26,7 @@ $conditions = array(
 $app->get(
 	'/(:lines)(/:read)(/:type)(/:direction)',
 	function ($lines = 150, $read = null, $type = null, $direction = null) use ($app, $config) {
-		$logs = Utils::glob($config->_filelist);
+		$logs = Utils::glob($config->filelist);
 
 		$app->view->params = array(
 			'format' => null,

@@ -1,6 +1,9 @@
 <?php
 $private = array(
 
+	/** default install dir */
+	'dir' => '/logviewer/',
+
 	// muzu provadet multi?
 	'isMulti' => '/^https?:\/\/\d+/',
 
@@ -85,4 +88,5 @@ $private = array(
 
 if (file_exists(__DIR__ . '/local.php')) require_once 'local.php';
 
-return array('private' => $private);
+global $config;
+$config = (object)$private;

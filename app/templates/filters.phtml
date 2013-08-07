@@ -1,44 +1,51 @@
+<?
+/**
+ * @var \logviewer\View $this
+ * @var string $format
+ * @var int $lines
+ * @var string $read
+ * @var string $type
+ * @var string $direction
+ * @var string $get
+ */
+?>
 <div class="navbar navbar-fixed-top">
 
-	<?
-	extract($params);
-	$get = array_key_exists('log', $_GET) ? array('log' => $_GET['log']) : array();
-	?>
-
-	<a class="navbar-brand" href="/">Logviewer</a>
+	<a class="navbar-brand" href="<?= $this->url() ?>"
+	   title="Server: <?= \logviewer\Utils::getServerName() ?>">LogViewer</a>
 
 	<? if ($format) { ?>
 		<a class="btn btn-default navbar-btn btn-danger"
-		   href="/<?= url(array_merge($params, array('format' => null))) ?>">
+		   href="<?= $this->url(array_merge($params, ['format' => null])) ?>">
 			&laquo; Back
 		</a>
 	<? } ?>
 
 	<!-- Lines -->
-	<a href="/<?= url(array_merge($params, array('lines' => 150)), $get) ?>"
+	<a href="<?= $this->url(array_merge($params, ['lines' => 150]), $get) ?>"
 	   class="btn btn-default navbar-btn <?= ($lines == 150) ? 'disabled' : null ?>">150</a>
 
-	<a href="/<?= url(array_merge($params, array('lines' => 500)), $get) ?>"
+	<a href="<?= $this->url(array_merge($params, ['lines' => 500]), $get) ?>"
 	   class="btn btn-default navbar-btn <?= ($lines == 500) ? 'disabled' : null ?>">500</a>
 
-	<a href="/<?= url(array_merge($params, array('lines' => 1000)), $get) ?>"
+	<a href="<?= $this->url(array_merge($params, ['lines' => 1000]), $get) ?>"
 	   class="btn btn-default navbar-btn <?= ($lines == 1000) ? 'disabled' : null ?>">1000</a>
 
 	<!-- Read -->
 	<? $read = ($read === 'tail') ? 'head' : 'tail'; ?>
-	<a href="/<?= url(array_merge($params, array('read' => $read)), $get) ?>" class="btn btn-default navbar-btn">
+	<a href="<?= $this->url(array_merge($params, ['read' => $read]), $get) ?>" class="btn btn-default navbar-btn">
 		Read log <?= $params['read'] ? : 'tail' ?>
 	</a>
 
 	<!-- Read servers -->
 	<? $type = ($type === 'single') ? 'multi' : 'single'; ?>
-	<a href="/<?= url(array_merge($params, array('type' => $type)), $get) ?>" class="btn btn-default navbar-btn">
+	<a href="<?= $this->url(array_merge($params, ['type' => $type]), $get) ?>" class="btn btn-default navbar-btn">
 		Read from <?= $params['type'] ? : 'single' ?> server
 	</a>
 
 	<!-- Direction -->
 	<? $direction = ($direction === 'normal') ? 'reverse' : 'normal'; ?>
-	<a href="/<?= url(array_merge($params, array('direction' => $direction)), $get) ?>"
+	<a href="<?= $this->url(array_merge($params, ['direction' => $direction]), $get) ?>"
 	   class="btn btn-default navbar-btn">
 		<?= ucfirst($params['direction'] ? : 'normal') ?> lines order
 	</a>
@@ -46,7 +53,7 @@
 	<!-- Download -->
 	<? if ($format) { ?>
 		<a class="btn btn-default navbar-btn btn-success"
-		   href="/<?= url(array_merge($params, array('format' => 'raw')), $get) ?>">
+		   href="<?= $this->url(array_merge($params, ['format' => 'raw']), $get) ?>">
 			Download
 		</a>
 	<? } ?>

@@ -1,6 +1,7 @@
-<? getHeader() ?>
+<? /** @var \logviewer\View $this */ ?>
+<? $this->getHeader() ?>
 
-<? getFilters($params); ?>
+<? $this->getFilters(); ?>
 
 	<div class="logs">
 
@@ -16,9 +17,10 @@
 						class="badge pull-right"><?= count($logs) ?></span></div>
 				<? if (count($logs) > 0) { ?>
 					<ul>
+
 						<? foreach ($logs as $log) { ?>
 							<li>
-								<a href="/view/<?= url($params, array('log' => $log['path'])); ?>"
+								<a href="<?= $this->url(array_merge($params, ['format' => 'view']), ['log' => $log['path']]); ?>"
 								   title="<?= realpath($log['path']) ?>"><?= $log['file'] ?></a>
 								<small>(<?= $log['size'] ?>)</small>
 							</li>
@@ -30,4 +32,4 @@
 		<? } ?>
 	</div>
 
-<? getFooter() ?>
+<? $this->getFooter() ?>
