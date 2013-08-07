@@ -19,7 +19,9 @@ Author: [wikidi.com](http://wikidi.com) & [Roman Ožana](https://github.com/Ozzy
 
 For the license terms see LICENSE.TXT file.
 
-
+```
+bower install https://github.com/wikidi/logviewer.git
+```
 -----
 
 [![Build Status](https://travis-ci.org/wikidi/logviewer.png?branch=master)](https://travis-ci.org/wikidi/logviewer)
