@@ -6,13 +6,8 @@ use Slim\Slim;
 
 header('Cache-Control: no-cache, must-revalidate');
 require 'vendor/autoload.php';
-require_once 'conf/config.php';
 
-$app = new Slim(
-	array(
-		'view' => new View($config)
-	)
-);
+$app = new Slim(array('view' => new View()));
 
 $conditions = array(
 	'lines' => 'all|[0-9]+',
@@ -21,12 +16,11 @@ $conditions = array(
 	'direction' => 'reverse|normal',
 );
 
-
 // homepage
 $app->get(
 	'/(:lines)(/:read)(/:type)(/:direction)',
-	function ($lines = 150, $read = null, $type = null, $direction = null) use ($app, $config) {
-		$logs = Utils::glob($config->filelist);
+	function ($lines = 150, $read = null, $type = null, $direction = null) use ($app) {
+		$logs = Utils::glob(Config::filelist());
 
 		$app->view->params = array(
 			'format' => null,
@@ -38,7 +32,6 @@ $app->get(
 
 		// logs
 		$app->view->logs = Utils::prepareLogs($logs);
-		$app->view->config = $config;
 		$app->view->display('list.phtml');
 	}
 )->conditions($conditions);
@@ -48,10 +41,9 @@ $app->get(
 $conditions['format'] = 'view|raw';
 $app->get(
 	'/:format(/:lines)(/:read)(/:type)(/:direction)',
-	function ($format, $lines = 150, $read = null, $type = null, $direction = null) use ($app, $config) {
-
+	function ($format, $lines = 150, $read = null, $type = null, $direction = null) use ($app) {
 		// configure reader
-		$logReader = new LogReader($config);
+		$logReader = new LogReader();
 		$logReader->log = $log = array_key_exists('log', $_GET) ? htmlspecialchars($_GET['log']) : null;
 		$logReader->logType = $logType = pathinfo($log, PATHINFO_EXTENSION);
 		$logReader->multi = $type === 'multi';
@@ -73,12 +65,12 @@ $app->get(
 			header('Content-Description: File Transfer');
 			header('Content-Disposition: attachment; filename="' . basename($log) . '"');
 			die(is_array($content) ? implode(PHP_EOL, $content) : $content);
+
 		} else {
 			$app->view->log = $log;
-			$app->view->logProcessor = new LogProcessor($config);
+			$app->view->logProcessor = new LogProcessor();
 			$app->view->output = $content;
 			$app->view->logType = $logType;
-			$app->view->config = $config;
 			$app->view->url = '';
 			$app->view->params = array(
 				'format' => $format,

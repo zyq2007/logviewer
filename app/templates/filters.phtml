@@ -9,7 +9,7 @@
  * @var string $get
  */
 ?>
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-default navbar-fixed-top">
 
 	<a class="navbar-brand" href="<?= $this->url() ?>"
 	   title="Server: <?= \logviewer\Utils::getServerName() ?>">LogViewer</a>
@@ -20,6 +20,10 @@
 			&laquo; Back
 		</a>
 	<? } ?>
+
+	<a class="btn btn-default navbar-btn btn-primary" href="<?= $this->url($params, $get); ?>">
+		Reload
+	</a>
 
 	<!-- Lines -->
 	<a href="<?= $this->url(array_merge($params, ['lines' => 150]), $get) ?>"
@@ -33,22 +37,46 @@
 
 	<!-- Read -->
 	<? $read = ($read === 'tail') ? 'head' : 'tail'; ?>
-	<a href="<?= $this->url(array_merge($params, ['read' => $read]), $get) ?>" class="btn btn-default navbar-btn">
-		Read log <?= $params['read'] ? : 'tail' ?>
-	</a>
+	<div class="btn-group navbar-btn">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			Read <?= $params['read'] ? : 'tail' ?>
+			<span class="caret"></span>
+		</button>
+
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="<?= $this->url(array_merge($params, ['read' => 'tail']), $get) ?>">Read tail</a></li>
+			<li><a href="<?= $this->url(array_merge($params, ['read' => 'head']), $get) ?>">Read head</a></li>
+		</ul>
+	</div>
 
 	<!-- Read servers -->
 	<? $type = ($type === 'single') ? 'multi' : 'single'; ?>
-	<a href="<?= $this->url(array_merge($params, ['type' => $type]), $get) ?>" class="btn btn-default navbar-btn">
-		Read from <?= $params['type'] ? : 'single' ?> server
-	</a>
+	<div class="btn-group navbar-btn">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			<?= ucfirst($params['type'] ? : 'single') ?> server
+			<span class="caret"></span>
+		</button>
+
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="<?= $this->url(array_merge($params, ['type' => 'single']), $get) ?>">Single server</a></li>
+			<li><a href="<?= $this->url(array_merge($params, ['type' => 'multi']), $get) ?>">Multi server</a></li>
+		</ul>
+	</div>
 
 	<!-- Direction -->
 	<? $direction = ($direction === 'normal') ? 'reverse' : 'normal'; ?>
-	<a href="<?= $this->url(array_merge($params, ['direction' => $direction]), $get) ?>"
-	   class="btn btn-default navbar-btn">
-		<?= ucfirst($params['direction'] ? : 'normal') ?> lines order
-	</a>
+	<div class="btn-group navbar-btn">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+			<?= ucfirst($params['direction'] ? : 'normal') ?> line order
+			<span class="caret"></span>
+		</button>
+
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="<?= $this->url(array_merge($params, ['direction' => 'reverse']), $get) ?>">Reverse line order</a>
+			</li>
+			<li><a href="<?= $this->url(array_merge($params, ['direction' => 'normal']), $get) ?>">Normal line order</a></li>
+		</ul>
+	</div>
 
 	<!-- Download -->
 	<? if ($format) { ?>

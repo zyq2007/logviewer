@@ -64,6 +64,19 @@ class Utils {
 		return $filesize;
 	}
 
+
+	public static function highlights($str, $highlights = array(), $tag = 'span') {
+		array_map('preg_quote', $highlights);
+		preg_match_all('/(' . implode('|', $highlights) . ')/i', $str, $marches);
+
+		if ($marches = reset($marches)) {
+			$marches = array_map('ucfirst', $marches);
+			return '<strong>' . implode('</strong> - <strong>', $marches) . '</strong>';
+		} else {
+			return $str;
+		}
+	}
+
 	/**
 	 * Vrati target ze zaznamu DNS
 	 */

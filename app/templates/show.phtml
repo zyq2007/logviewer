@@ -1,5 +1,4 @@
 <? /** @var \logviewer\View $this */ ?>
-<? /** @var \logviewer\Config $config */ ?>
 <? /** @var \logviewer\LogProcessor $logProcessor */ ?>
 
 <? $this->getHeader() ?>
@@ -39,22 +38,17 @@ $escapeAndReplace = function ($output, $url) use ($log, $logProcessor) {
 			case 'log':
 			default:
 				if (is_array($output)) {
-					$i = 1;
 					echo '<ul class="nav nav-tabs" id="servers">';
-					foreach ($output as $server) {
-						echo '<li class="' . (($i == 1) ? ' active' : null) . '"><a href="#server-' . $i . '" data-toggle="tab" title="' . $server['host'] . '">&nbsp;' . $i . '&nbsp;</a></li>';
-						$i++;
+					foreach ($output as $i => $server) {
+						echo '<li class="' . (($i == 0) ? ' active' : null) . '"><a href="#server-' . ($i + 1) . '" data-toggle="tab" title="' . $server['host'] . '">&nbsp;' . ($i + 1) . '&nbsp;</a></li>';
 					}
 					echo '</ul>';
-
 					echo '<div class="tab-content">';
-					$i = 1;
-					foreach ($output as $server) {
-						echo '<div class="tab-pane' . (($i === 1) ? ' active' : null) . '" id="server-' . $i . '">
+					foreach ($output as $i => $server) {
+						echo '<div class="tab-pane' . (($i === 0) ? ' active' : null) . '" id="server-' . ($i + 1) . '">
 					<h4>' . $server['host'] . '</h4>';
-						echo '<pre>' . $escapeAndReplace($server['output'], $server['logviewer'] . $url) . '</pre>';
+						echo '<pre>' . $escapeAndReplace($server['output'], $url) . '</pre>';
 						echo '</div>';
-						$i++;
 					}
 					echo '</div>';
 

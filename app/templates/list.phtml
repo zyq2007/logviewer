@@ -12,9 +12,11 @@
 
 		<? foreach ($logs as $group => $logs) { ?>
 
-			<div class="panel">
-				<div class="panel-heading" title="<?= realpath($group) ?>"><?= realpath($group) ?> <span
-						class="badge pull-right"><?= count($logs) ?></span></div>
+			<div class="panel panel-default">
+				<div class="panel-heading" title="<?= realpath($group) ?>">
+					<?= \logviewer\Utils::highlights(realpath($group), \logviewer\Config::highlights()) ?>
+					<span class="badge pull-right"><?= count($logs) ?></span>
+				</div>
 				<? if (count($logs) > 0) { ?>
 					<ul>
 
@@ -27,6 +29,8 @@
 						<? } ?>
 					</ul>
 				<? } ?>
+
+				<div class="panel-footer"><?= realpath($group) ?></div>
 			</div>
 
 		<? } ?>

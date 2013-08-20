@@ -7,8 +7,6 @@ namespace logviewer;
  */
 class LogReader {
 
-	/** @var Config */
-	private $config;
 	/** @var string */
 	public $lines = 150;
 	/** @var bool */
@@ -22,10 +20,6 @@ class LogReader {
 	/** @var string */
 	public $logType = '';
 
-	public function __construct($config) {
-		$this->config = $config;
-	}
-
 	public function display() {
 		switch ($this->logType) {
 			case 'png':
@@ -37,7 +31,7 @@ class LogReader {
 			case 'log':
 			default:
 				if ($this->multi) {
-					$output = $this->processRemote();
+					$output = $this->processRemote($this->log);
 				} else {
 					$output = $this->processLocal($this->log);
 				}
@@ -52,7 +46,7 @@ class LogReader {
 		$glob = preg_replace('/^(.*\.log)$/', '\1 \1*.gz', $glob); //logrotate support
 
 		$matched = false;
-		foreach ($this->config->filelist as $link) {
+		foreach (Config::filelist() as $link) {
 			$pattern = '#^' . str_replace('\*', '.+', preg_quote($link, '#')) . '$#i';
 			if (preg_match($pattern, $this->log)) {
 				$matched = true;
@@ -75,58 +69,36 @@ class LogReader {
 		return $output;
 	}
 
-	private function formatOutput($output, $reverse) {
-		if ($reverse) $output = array_reverse($output);
-
-		// todo jen u multi readingu
-		/*
-		if (showmachine) $output = array_map(
-			function ($line) {
-				return '-' . $_SERVER['HTTP_HOST'] . '- ' . $line;
-			}, $output
-		);*/
-
-		return implode(PHP_EOL, $output);
-	}
-
 	private function processLocal($log) {
 		$limit = ($this->lines > 0) ? intval($this->lines) : 150;
 		try {
 			$output = $this->cat($log, $limit);
 		} catch (NotReadableException $e) {
-			//@TODO hezčí formátování
 			die($e->getMessage());
 		}
-		return $this->formatOutput($output, $this->reverse, true);
+
+		$output = ($this->reverse) ? array_reverse($output) : $output;
+		return implode(PHP_EOL, $output);
 	}
 
-	private function processRemote() {
-		// pripravim si parametry pro remoote
-		parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $params);
-		$params['raw'] = '1';
-		$params['multi'] = '0';
+	private function processRemote($log) {
+		$params = array(
+			'raw', $this->lines, $this->tail ? 'tail' : 'head', 'single', $this->reverse ? 'reverse' : 'normal'
+		);
 
-		$protocol = strpos($_SERVER['SERVER_PROTOCOL'], 'HTTPS') === false ? 'http://' : 'https://';
-		$port = $_SERVER['SERVER_PORT'];
-		$host = parse_url($_SERVER['HTTP_HOST'], PHP_URL_PORT) ? parse_url(
-			$_SERVER['HTTP_HOST'], PHP_URL_HOST
-		) : $_SERVER['HTTP_HOST'];
-		$script = $_SERVER['SCRIPT_NAME'];
+		$get = array_key_exists('log', $_GET) ? array('log' => $_GET['log']) : array();
+		$url = View::url($params, $get);
 
-		// pro testovani
-		//$host = 'wikidi-admin.1.web.srv.wikidi.net'; $port = '8080'; $params['log'] = '/var/www/wikidi/logs/php/error.log';
+		// url for testing multiple
+		//$url = 'http://wikidi-admin.1.web.srv.wikidi.net:8088/logviewer/' . implode('/', $params) . '?log=%2Fvar%2Fwww%2Ftestomato%2Flogs%2Fnginx%2Fapp.access.log';
 
-		$url = $protocol . $host . ':' . $port . $script . '?' . http_build_query($params);
-
-		if (preg_match($this->config->isMulti, $url)) {
+		if (preg_match(Config::isMulti(), $url)) {
 			$output = array();
-			foreach ($this->getMultiUrl($url) as $remoote) {
-				$host = parse_url($remoote, PHP_URL_HOST);
+			foreach ($this->getMultiUrl($url) as $remote) {
 				$output[] = [
-					'host' => $host,
-					'url' => $remoote,
-					'logviewer' => $protocol . $host . ':' . $port . $script,
-					'output' => $this->file_get_contents($remoote)
+					'host' => parse_url($remote, PHP_URL_HOST),
+					'url' => $remote,
+					'output' => $this->file_get_contents($remote)
 				];
 			}
 		} else {

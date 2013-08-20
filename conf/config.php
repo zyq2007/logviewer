@@ -1,6 +1,8 @@
 <?php
 $private = array(
 
+	'highlights' => array(),
+
 	/** default install dir */
 	'dir' => '/logviewer/',
 
@@ -86,7 +88,6 @@ $private = array(
 	)
 );
 
-if (file_exists(__DIR__ . '/local.php')) require_once 'local.php';
+$local = file_exists(__DIR__ . '/local.php') ? require 'local.php' : array();
 
-global $config;
-$config = (object)$private;
+return array_merge($private, $local);

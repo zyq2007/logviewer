@@ -8,21 +8,36 @@ body {
 
 .panel {
 	float: left;
-	width: 390px;
-	margin-right: 20px;
+	width: 298px;
+	margin-right: 15px;
+	margin-bottom: 15px;
 	padding: 0;
 	-moz-box-sizing: border-box !important;
 	box-sizing: border-box !important;
 }
 
 .panel-heading {
+	border-bottom: 0;
+	padding: 7px 10px;
 	margin: 0;
+}
+
+.panel-heading .badge {
+	color: #777;
+	background-color: #fff;
+}
+
+.panel-footer {
+	margin-top: 5px;
+	border-top: 0;
+	font-size: 12px;
+	padding: 4px 10px;
 }
 
 .panel ul {
 	list-style-type: none;
 	margin: 0;
-	padding: 10px 15px;
+	padding: 6px 10px;
 	max-width: 100%;
 	height: 200px;
 	overflow: scroll;
