@@ -79,8 +79,8 @@ $private = array(
 
 		// tracy
 		'/(.*Fatal error:[^\n]*)/' => '<span class="faild">$1</span>',
-		'/(\S+\/exception-[\-0-9]*-[[:alnum:]]*\.html)/' => '<a href="{url}&action=show&log=$1">$1</a>',
-		'/([^\/])(exception-[\-0-9]*-[[:alnum:]]*\.html)/' => '$1<a href="{url}&action=show&log={dirname}/$2">$2</a>',
+		'/(\S+\/exception-[\-0-9]*-[[:alnum:]]*\.html)/' => '<a href="{url}?log=$1">$1</a>',
+		'/([^\/])(exception-[\-0-9]*-[[:alnum:]]*\.html)/' => '$1<a href="{url}?log={dirname}/$2">$2</a>',
 
 		'/([^\n]+------+\n)/' => '<hr>',
 		'/([^\n]+======+\n)/' => '</pre><pre>',

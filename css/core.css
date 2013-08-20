@@ -110,6 +110,7 @@ span.success,
 span.faild span,
 span.success span {
 	color: #fff;
+	margin: 3px 0;
 }
 
 span.faild,

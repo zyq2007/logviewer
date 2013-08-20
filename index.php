@@ -19,12 +19,12 @@ $conditions = array(
 // homepage
 $app->get(
 	'/(:lines)(/:read)(/:type)(/:direction)',
-	function ($lines = 150, $read = null, $type = null, $direction = null) use ($app) {
+	function ($lines = 150, $read = 'tail', $type = 'single', $direction = 'normal') use ($app) {
 		$logs = Utils::glob(Config::filelist());
 
 		$app->view->params = array(
 			'format' => null,
-			'lines' => $lines,
+			'lines' => intval($lines),
 			'read' => $read,
 			'type' => $type,
 			'direction' => $direction
@@ -41,15 +41,15 @@ $app->get(
 $conditions['format'] = 'view|raw';
 $app->get(
 	'/:format(/:lines)(/:read)(/:type)(/:direction)',
-	function ($format, $lines = 150, $read = null, $type = null, $direction = null) use ($app) {
+	function ($format, $lines = 150, $read = 'tail', $type = 'single', $direction = 'normal') use ($app) {
 		// configure reader
 		$logReader = new LogReader();
 		$logReader->log = $log = array_key_exists('log', $_GET) ? htmlspecialchars($_GET['log']) : null;
-		$logReader->logType = $logType = pathinfo($log, PATHINFO_EXTENSION);
-		$logReader->multi = $type === 'multi';
+		$logReader->mime = $extension = pathinfo($log, PATHINFO_EXTENSION);
 		$logReader->lines = intval($lines);
-		$logReader->tail = $read === 'tail' || $read === null;
-		$logReader->reverse = $direction === 'reverse';
+		$logReader->read = $read ? : 'tail';
+		$logReader->type = $type ? : 'single';
+		$logReader->direction = $direction ? $direction : 'normal';
 		$content = $logReader->display();
 
 		if ($format === 'raw') {
@@ -60,7 +60,7 @@ $app->get(
 				'jpg' => 'image/jpeg',
 			);
 
-			header('Content-Type: ' . (array_key_exists($logType, $mime) ? $mime[$logType] : 'text/plain'));
+			header('Content-Type: ' . (array_key_exists($extension, $mime) ? $mime[$extension] : 'text/plain'));
 			header('Content-Type: application/force-download');
 			header('Content-Description: File Transfer');
 			header('Content-Disposition: attachment; filename="' . basename($log) . '"');
@@ -70,7 +70,7 @@ $app->get(
 			$app->view->log = $log;
 			$app->view->logProcessor = new LogProcessor();
 			$app->view->output = $content;
-			$app->view->logType = $logType;
+			$app->view->logType = $extension;
 			$app->view->url = '';
 			$app->view->params = array(
 				'format' => $format,

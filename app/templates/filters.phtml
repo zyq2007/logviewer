@@ -72,9 +72,9 @@
 		</button>
 
 		<ul class="dropdown-menu" role="menu">
+			<li><a href="<?= $this->url(array_merge($params, ['direction' => 'normal']), $get) ?>">Normal line order</a></li>
 			<li><a href="<?= $this->url(array_merge($params, ['direction' => 'reverse']), $get) ?>">Reverse line order</a>
 			</li>
-			<li><a href="<?= $this->url(array_merge($params, ['direction' => 'normal']), $get) ?>">Normal line order</a></li>
 		</ul>
 	</div>
 

@@ -10,27 +10,27 @@ class LogReader {
 	/** @var string */
 	public $lines = 150;
 	/** @var bool */
-	public $reverse = true;
+	public $direction = true;
 	/** @var bool */
-	public $tail = true;
+	public $read = true;
 	/** @var bool */
-	public $multi = false;
+	public $type = false;
 	/** @var string */
 	public $log = '';
 	/** @var string */
-	public $logType = '';
+	public $mime = '';
 
 	public function display() {
-		switch ($this->logType) {
+		switch ($this->mime) {
 			case 'png':
 			case 'jpeg':
 			case 'jpg':
 			case 'html':
-				return file_get_contents($this->log);
+				return file_exists($this->log) ? file_get_contents($this->log) : 'Missing file : ' . $this->log;
 			case 'txt':
 			case 'log':
 			default:
-				if ($this->multi) {
+				if ($this->type) {
 					$output = $this->processRemote($this->log);
 				} else {
 					$output = $this->processLocal($this->log);
@@ -62,7 +62,7 @@ class LogReader {
 
 		$output = array();
 		exec(
-			'for i in `ls -t -r ' . $glob . '`; do gzip -dc -f $i 2>&1; done | ' . ($this->tail ? 'tail' : 'head') . ' -n ' . escapeshellarg(
+			'for i in `ls -t -r ' . $glob . '`; do gzip -dc -f $i 2>&1; done | ' . ($this->read ? 'tail' : 'head') . ' -n ' . escapeshellarg(
 				$limit
 			), $output, $retval
 		);
@@ -77,27 +77,24 @@ class LogReader {
 			die($e->getMessage());
 		}
 
-		$output = ($this->reverse) ? array_reverse($output) : $output;
+		$output = ($this->direction) ? array_reverse($output) : $output;
 		return implode(PHP_EOL, $output);
 	}
 
 	private function processRemote($log) {
-		$params = array(
-			'raw', $this->lines, $this->tail ? 'tail' : 'head', 'single', $this->reverse ? 'reverse' : 'normal'
-		);
-
+		$params = array('raw', $this->lines, $this->read, 'single', $this->direction);
 		$get = array_key_exists('log', $_GET) ? array('log' => $_GET['log']) : array();
 		$url = View::url($params, $get);
 
 		// url for testing multiple
-		//$url = 'http://wikidi-admin.1.web.srv.wikidi.net:8088/logviewer/' . implode('/', $params) . '?log=%2Fvar%2Fwww%2Ftestomato%2Flogs%2Fnginx%2Fapp.access.log';
+		//$url = 'http://wikidi-admin.1.web.srv.wikidi.net:8088/logviewer/' . implode('/', $params) . '?log=/var/www/testomato/logs/php/error.log';
 
 		if (preg_match(Config::isMulti(), $url)) {
 			$output = array();
 			foreach ($this->getMultiUrl($url) as $remote) {
 				$output[] = [
 					'host' => parse_url($remote, PHP_URL_HOST),
-					'url' => $remote,
+					'url' => strtok($remote, '?'),
 					'output' => $this->file_get_contents($remote)
 				];
 			}

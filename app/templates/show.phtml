@@ -45,9 +45,9 @@ $escapeAndReplace = function ($output, $url) use ($log, $logProcessor) {
 					echo '</ul>';
 					echo '<div class="tab-content">';
 					foreach ($output as $i => $server) {
-						echo '<div class="tab-pane' . (($i === 0) ? ' active' : null) . '" id="server-' . ($i + 1) . '">
-					<h4>' . $server['host'] . '</h4>';
-						echo '<pre>' . $escapeAndReplace($server['output'], $url) . '</pre>';
+						echo '<div class="tab-pane' . (($i === 0) ? ' active' : null) . '" id="server-' . ($i + 1) . '">';
+						echo '<h4><a href="' . $server['url'] . '">' . $server['host'] . '</a></h4>';
+						echo '<pre>' . $escapeAndReplace($server['output'], $server['url']) . '</pre>';
 						echo '</div>';
 					}
 					echo '</div>';
