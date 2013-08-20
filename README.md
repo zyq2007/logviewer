@@ -9,9 +9,10 @@ Download repo and change conf/config.php or create conf/local.php and overwrite 
 ## Examples
 
 ![LogViewer](https://raw.github.com/wikidi/logviewer/master/doc/example.png "Example")
-![Log Output example](https://raw.github.com/wikidi/logviewer/master/doc/example1.png "Example")
+![LogViewer Menu](https://raw.github.com/wikidi/logviewer/master/doc/example1.png "Example")
 ![Log Output example](https://raw.github.com/wikidi/logviewer/master/doc/example2.png "Example")
 ![Log Output example](https://raw.github.com/wikidi/logviewer/master/doc/example3.png "Example")
+![Log Output example](https://raw.github.com/wikidi/logviewer/master/doc/example4.png "Example")
 
 ## Install
 
