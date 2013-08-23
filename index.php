@@ -19,7 +19,7 @@ $conditions = array(
 // homepage
 $app->get(
 	'/(:lines)(/:read)(/:type)(/:direction)',
-	function ($lines = 150, $read = 'tail', $type = 'single', $direction = 'normal') use ($app) {
+	function ($lines = 150, $read = 'tail', $type = 'single', $direction = 'reverse') use ($app) {
 		$logs = Utils::glob(Config::filelist());
 
 		$app->view->params = array(
@@ -41,15 +41,15 @@ $app->get(
 $conditions['format'] = 'view|raw';
 $app->get(
 	'/:format(/:lines)(/:read)(/:type)(/:direction)',
-	function ($format, $lines = 150, $read = 'tail', $type = 'single', $direction = 'normal') use ($app) {
+	function ($format, $lines = 150, $read = 'tail', $type = 'single', $direction = 'reverse') use ($app) {
 		// configure reader
 		$logReader = new LogReader();
 		$logReader->log = $log = array_key_exists('log', $_GET) ? htmlspecialchars($_GET['log']) : null;
 		$logReader->mime = $extension = pathinfo($log, PATHINFO_EXTENSION);
 		$logReader->lines = intval($lines);
-		$logReader->read = $read ? : 'tail';
-		$logReader->type = $type ? : 'single';
-		$logReader->direction = $direction ? $direction : 'normal';
+		$logReader->read = $read;
+		$logReader->type = $type;
+		$logReader->direction = $direction;
 		$content = $logReader->display();
 
 		if ($format === 'raw') {

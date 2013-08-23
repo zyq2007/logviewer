@@ -10,9 +10,9 @@ class LogReader {
 	/** @var string */
 	public $lines = 150;
 	/** @var bool */
-	public $direction = true;
+	public $direction = 'normal';
 	/** @var bool */
-	public $read = true;
+	public $read = 'tail';
 	/** @var bool */
 	public $type = false;
 	/** @var string */
