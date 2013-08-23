@@ -7,3 +7,7 @@ conf/local.php
 vendor/nette
 vendor/bin
 composer.lock
+
+
+node_modules
+Gruntfile.js

@@ -1,0 +1,25 @@
+{
+	"name": "logviewer",
+	"version": "2.0.2",
+	"description": "Simple log viewer with color highlighting important parts in log eg. error, warnings, notices etc.",
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/wikidi/logviewer.git"
+	},
+	"keywords": [
+		"log",
+		"php"
+	],
+	"author": {
+		"name": "Devel lab s.r.o.",
+		"url": "http://www.wikidi.cz"
+	},
+	"license": "BSD-2-Clause",
+	"bugs": {
+		"url": "https://github.com/wikidi/logviewer/issues"
+	},
+	"dependencies": {
+		"grunt-bump": "0.0.11"
+	}
+}
