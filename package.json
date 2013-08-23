@@ -1,6 +1,6 @@
 {
 	"name": "logviewer",
-	"version": "2.1.2",
+	"version": "2.1.3",
 	"description": "Simple log viewer with color highlighting important parts in log eg. error, warnings, notices etc.",
 	"main": "index.js",
 	"repository": {
