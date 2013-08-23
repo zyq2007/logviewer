@@ -1,7 +1,7 @@
 module.exports = (grunt) ->
   grunt.initConfig
     bump:
-      files: ['package.json', 'composer.json']
+      files: ['package.json']
       push: false
 
   grunt.loadNpmTasks 'grunt-bump'
