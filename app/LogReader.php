@@ -62,7 +62,7 @@ class LogReader {
 
 		$output = array();
 		exec(
-			'for i in `ls -t -r ' . $glob . '`; do gzip -dc -f $i 2>&1; done | ' . ($this->read ? 'tail' : 'head') . ' -n ' . escapeshellarg(
+			'for i in `ls -t -r ' . $glob . '`; do gzip -dc -f $i 2>&1; done | ' . $this->read . ' -n ' . escapeshellarg(
 				$limit
 			), $output, $retval
 		);
@@ -77,7 +77,7 @@ class LogReader {
 			die($e->getMessage());
 		}
 
-		$output = ($this->direction) ? array_reverse($output) : $output;
+		$output = ($this->direction === 'reverse') ? array_reverse($output) : $output;
 		return implode(PHP_EOL, $output);
 	}
 
