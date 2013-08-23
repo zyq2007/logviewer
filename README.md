@@ -22,6 +22,12 @@ bower install https://github.com/wikidi/logviewer.git
 
 Setup `$private['filelist']` and `$private['dir']` when running outside httpd dir.
 
+## Release
+
+```
+grunt release
+```
+
 ## Meta
 
 Author: [wikidi.com](http://wikidi.com) & [Roman Ožana](https://github.com/OzzyCzech) & [Tomaš Ovesný](https://github.com/tomasovesny) & [Lex Vjatkin](https://github.com/lexvjatkin) & [Jan Prachař](https://github.com/pracj3am)
