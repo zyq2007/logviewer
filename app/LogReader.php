@@ -30,7 +30,7 @@ class LogReader {
 			case 'txt':
 			case 'log':
 			default:
-				if ($this->type) {
+				if ($this->type === 'multi') {
 					$output = $this->processRemote($this->log);
 				} else {
 					$output = $this->processLocal($this->log);
@@ -42,8 +42,8 @@ class LogReader {
 	}
 
 	private function cat($glob, $limit) {
-		$phpglob = preg_replace('/\.log$/', '.log{,*.gz}', $glob); //logrotate support
-		$glob = preg_replace('/^(.*\.log)$/', '\1 \1*.gz', $glob); //logrotate support
+		$phpglob = preg_replace('/\.log$/', '.log{,*.gz}', $glob); //log rotate support
+		$glob = preg_replace('/^(.*\.log)$/', '\1 \1*.gz', $glob); //log rotate support
 
 		$matched = false;
 		foreach (Config::filelist() as $link) {
@@ -70,9 +70,8 @@ class LogReader {
 	}
 
 	private function processLocal($log) {
-		$limit = ($this->lines > 0) ? intval($this->lines) : 150;
 		try {
-			$output = $this->cat($log, $limit);
+			$output = $this->cat($log, intval($this->lines));
 		} catch (NotReadableException $e) {
 			die($e->getMessage());
 		}
@@ -82,7 +81,7 @@ class LogReader {
 	}
 
 	private function processRemote($log) {
-		$params = array('raw', $this->lines, $this->read, 'single', $this->direction);
+		$params = array('raw', intval($this->lines), $this->read, 'single', $this->direction);
 		$get = array_key_exists('log', $_GET) ? array('log' => $_GET['log']) : array();
 		$url = View::url($params, $get);
 
