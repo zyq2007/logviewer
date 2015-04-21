@@ -32,24 +32,16 @@ class View extends \Slim\View {
 		return __DIR__ . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR . ltrim($file, DIRECTORY_SEPARATOR);
 	}
 
-	public static function url($params = '', $get = array()) {
-		if (is_array($params)) {
-			$params = array_filter($params);
-			return static::getCurrentUrl() . implode('/', $params) . ($get ? '?' . http_build_query($get) : null);
-		}
-		return static::getCurrentUrl() . $params;
+	/**
+	 * @param string|array $slug
+	 * @param array $query
+	 * @return \Url
+	 */
+	public static function url($slug = '', $query = []) {
+		$url = \Url::current();
+		$path = is_array($slug) ? implode('/', $slug) : $slug;
+		$url->path(Config::dir() . '/' . rtrim($path));
+		$url->query($query);
+		return $url;
 	}
-
-	public static function  getCurrentUrl($path = '') {
-		if (isset($_SERVER['REQUEST_URI'])) {
-			$parse = parse_url(
-				(isset($_SERVER['HTTPS']) && strcasecmp($_SERVER['HTTPS'], 'off') ? 'https://' : 'http://') .
-				(isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : (isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '')) . Config::dir(
-				)
-			);
-			$parse['port'] = $_SERVER["SERVER_PORT"]; // setup protocol for sure (80 is default)
-			return http_build_url('', $parse);
-		}
-	}
-
 }

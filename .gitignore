@@ -3,11 +3,5 @@
 .settings
 /nbproject
 /.idea
-conf/local.php
-vendor/nette
-vendor/bin
+conf/dev.php
 composer.lock
-
-
-node_modules
-Gruntfile.js

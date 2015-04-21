@@ -39,7 +39,7 @@
 	<? $read = ($read === 'tail') ? 'head' : 'tail'; ?>
 	<div class="btn-group navbar-btn">
 		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			Read <?= $params['read'] ? : 'tail' ?>
+			Read <?= $params['read'] ?: 'tail' ?>
 			<span class="caret"></span>
 		</button>
 
@@ -53,7 +53,7 @@
 	<? $type = ($type === 'single') ? 'multi' : 'single'; ?>
 	<div class="btn-group navbar-btn">
 		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			<?= ucfirst($params['type'] ? : 'single') ?> server
+			<?= ucfirst($params['type'] ?: 'single') ?> server
 			<span class="caret"></span>
 		</button>
 
@@ -67,7 +67,7 @@
 	<? $direction = ($direction === 'normal') ? 'reverse' : 'normal'; ?>
 	<div class="btn-group navbar-btn">
 		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-			<?= ucfirst($params['direction'] ? : 'normal') ?> line order
+			<?= ucfirst($params['direction'] ?: 'normal') ?> line order
 			<span class="caret"></span>
 		</button>
 

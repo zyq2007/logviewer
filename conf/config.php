@@ -1,7 +1,7 @@
 <?php
-$private = array(
+$private = [
 
-	'highlights' => array(),
+	'highlights' => [],
 
 	/** default install dir */
 	'dir' => '/logviewer/',
@@ -10,15 +10,13 @@ $private = array(
 	'isMulti' => '/^https?:\/\/\d+/',
 
 	// masky adresaru s logy
-	'filelist' => array(
-		'/var/log/*/*.log'
-	),
+	'filelist' => ['/var/log/*/*.log'],
 
 	// regexps for replaces in log content
-	'replace' => array(
+	'replace' => [
 		// ANSI escape chars
-		'/\x1b(\[|\(|\))[;?0-9]*[0-9A-Za-z]/' => "",
-		'/\x1b(\[|\(|\))[;?0-9]*[0-9A-Za-z]/' => "",
+		'/\x1b(\[|\(|\))[;?0-9]*[0-9A-Za-z]/' => '',
+		'/\x1b(\[|\(|\))[;?0-9]*[0-9A-Za-z]/' => '',
 		'/[\x03|\x1a]/' => "",
 
 		// BUILD
@@ -85,9 +83,10 @@ $private = array(
 		'/([^\n]+------+\n)/' => '<hr>',
 		'/([^\n]+======+\n)/' => '</pre><pre>',
 		'/https?:\/\/[^<>[:space:]]+[[:alnum:]|\/]/i' => '<a href="$0" target="_blank">$0</a>',
-	)
-);
+	]
+];
 
-$local = file_exists(__DIR__ . '/local.php') ? require 'local.php' : array();
+$local = file_exists(__DIR__ . '/local.php') ? require __DIR__ . '/local.php' : [];
+$dev = file_exists(__DIR__ . '/dev.php') ? require __DIR__ . '/dev.php' : [];
 
-return array_merge($private, $local);
+return array_merge($private, $local, $dev);

@@ -1,24 +1,26 @@
 [
     {
         "name": "slim/slim",
-        "version": "2.3.1",
-        "version_normalized": "2.3.1.0",
+        "version": "2.6.2",
+        "version_normalized": "2.6.2.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/codeguy/Slim.git",
-            "reference": "2.3.1"
+            "url": "https://github.com/slimphp/Slim.git",
+            "reference": "20a02782f76830b67ae56a5c08eb1f563c351a37"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/codeguy/Slim/zipball/2.3.1",
-            "reference": "2.3.1",
+            "url": "https://api.github.com/repos/slimphp/Slim/zipball/20a02782f76830b67ae56a5c08eb1f563c351a37",
+            "reference": "20a02782f76830b67ae56a5c08eb1f563c351a37",
             "shasum": ""
         },
         "require": {
-            "ext-mcrypt": "*",
             "php": ">=5.3.0"
         },
-        "time": "2013-07-20 18:38:05",
+        "suggest": {
+            "ext-mcrypt": "Required for HTTP cookie encryption"
+        },
+        "time": "2015-03-08 18:41:17",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -46,56 +48,49 @@
         ]
     },
     {
-        "name": "nette/tester",
-        "version": "dev-master",
-        "version_normalized": "9999999-dev",
+        "name": "sphido/url",
+        "version": "v0.0.1",
+        "version_normalized": "0.0.1.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/nette/tester.git",
-            "reference": "3efa7838508c530d07ef607c77a6d5b923469f25"
+            "url": "https://github.com/sphido/url.git",
+            "reference": "857416eecf10b3b2e7ee09fe30945629625de723"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nette/tester/zipball/3efa7838508c530d07ef607c77a6d5b923469f25",
-            "reference": "3efa7838508c530d07ef607c77a6d5b923469f25",
+            "url": "https://api.github.com/repos/sphido/url/zipball/857416eecf10b3b2e7ee09fe30945629625de723",
+            "reference": "857416eecf10b3b2e7ee09fe30945629625de723",
             "shasum": ""
         },
         "require": {
-            "php": ">=5.3.0"
+            "php": ">=5.5.6"
         },
-        "time": "2013-08-05 21:48:35",
-        "bin": [
-            "Tester/tester"
-        ],
+        "require-dev": {
+            "nette/tester": "*"
+        },
+        "time": "2015-02-14 23:20:15",
         "type": "library",
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
-            "classmap": [
-                "Tester/"
+            "files": [
+                "src/url.php"
             ]
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "BSD-3-Clause",
-            "GPL-2.0",
-            "GPL-3.0"
+            "BSD-3-Clause"
         ],
         "authors": [
             {
-                "name": "David Grudl",
-                "homepage": "http://davidgrudl.com"
-            },
-            {
-                "name": "Nette Community",
-                "homepage": "http://nette.org/contributors"
+                "name": "Roman Ožana",
+                "email": "ozana@omdesign.cz",
+                "homepage": "http://www.omdesign.cz/"
             }
         ],
-        "description": "An easy-to-use PHP Unit Testing framework.",
-        "homepage": "http://nette.org",
+        "description": "Simple URL helper",
+        "homepage": "http://www.sphido.org",
         "keywords": [
-            "nette",
-            "testing",
-            "unit"
+            "url"
         ]
     }
 ]

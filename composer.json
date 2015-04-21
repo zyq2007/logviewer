@@ -1,36 +1,37 @@
 {
-	"name": "wikidi/logviewer",
-	"type": "tool",
-	"description": "Simple log viewer with color highlighting important parts in log eg. error, warnings, notices etc.",
-	"minimum-stability": "stable",
-	"license": [
-		"BSD-3-Clause"
-	],
-	"authors": [
-		{
-			"name": "Roman Ožana",
-			"email": "ozana@omdesign.cz",
-			"homepage": "http://www.omdesign.cz"
-		},
-		{
-			"name": "Tomaš Ovesný",
-			"homepage": "https://github.com/tomasovesny"
-		},
-		{
-			"name": "Lex Vjatkin",
-			"homepage": "https://github.com/lexvjatkin"
-		},
-		{
-			"name": "Jan Prachař",
-			"email": "jan@prachar.eu",
-			"homepage": "http://www.prachar.eu"
-		}
-	],
-	"autoload": {
-		"classmap": ["app"]
-	},
-	"require": {
-		"php": ">=5.4.0",
-		"slim/slim": "2.*"
-	}
+  "name": "wikidi/logviewer",
+  "type": "tool",
+  "description": "Simple log viewer with color highlighting important parts in log eg. error, warnings, notices etc.",
+  "minimum-stability": "stable",
+  "license": [
+    "BSD-3-Clause"
+  ],
+  "authors": [
+    {
+      "name": "Roman Ožana",
+      "email": "ozana@omdesign.cz",
+      "homepage": "http://www.omdesign.cz"
+    },
+    {
+      "name": "Tomaš Ovesný",
+      "homepage": "https://github.com/tomasovesny"
+    },
+    {
+      "name": "Lex Vjatkin",
+      "homepage": "https://github.com/lexvjatkin"
+    },
+    {
+      "name": "Jan Prachař",
+      "email": "jan@prachar.eu",
+      "homepage": "http://www.prachar.eu"
+    }
+  ],
+  "autoload": {
+    "classmap": ["app"]
+  },
+  "require": {
+    "php": ">=5.4.0",
+    "slim/slim": "2.6.2",
+    "sphido/url": "0.0.1"
+  }
 }

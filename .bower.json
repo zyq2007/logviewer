@@ -1,0 +1,14 @@
+{
+  "name": "logviewer",
+  "homepage": "https://github.com/wikidi/logviewer",
+  "version": "2.0.2",
+  "_release": "2.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.0.2",
+    "commit": "f0c310554cd81cbc9962986ee93f44f9e1e110e9"
+  },
+  "_source": "https://github.com/wikidi/logviewer.git",
+  "_target": "~2.0.2",
+  "_direct": true
+}

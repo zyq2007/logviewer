@@ -5,15 +5,15 @@
 
 // or use our example
 
-return array(
+return [
 
 	'dir' => '/', # logviewer install dir
 
 	'isMulti' => '/.*\d+\..*\.wikidi\.\w+/',
 
-	'highlights' => array('log'),
+	'highlights' => ['log'],
 
-	'filelist' => array(
+	'filelist' => [
 
 		dirname(__DIR__) . '/app/log/*.log',
 		dirname(__DIR__) . '/app/log/*.jpg',
@@ -21,5 +21,5 @@ return array(
 		dirname(__DIR__) . '/app/log/*.html',
 
 		//dirname(__DIR__) . '/../**/*.*',
-	)
-);
+	]
+];
